@@ -35,7 +35,7 @@ services:
       dockerfile: 'Dockerfile'
       args:
         PORT: 3002
-        CHAIN_ID: 5
+        CHAIN_ID: "${CHAIN_ID}"
     networks:
       - local
     ports:
@@ -53,11 +53,11 @@ services:
     environment:
       - VERSION=v5 # For logging purposes
       - PORT=3001 # Port to listen on
-      - CHAIN_ID=5 # Chain id the indexer is running on
+      - CHAIN_ID="${CHAIN_ID}" # Chain id the indexer is running on
       - INDEXER_BASE_URL=http://localhost:3001
       - ADMIN_API_KEY=MY_KEY # Required by all admin APIs (via the `X-Admin-Api-Key` header)
-      - BASE_NETWORK_HTTP_URL=https://eth-goerli.g.alchemy.com/v2/TYXOxQE-qhhwe3Sn2ToFhqRl428qXyUI # Http and WebSocket provider URLs
-      - BASE_NETWORK_WS_URL=wss://eth-goerli.g.alchemy.com/v2/TYXOxQE-qhhwe3Sn2ToFhqRl428qXyUI
+      - BASE_NETWORK_HTTP_URL="https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}"" # Http and WebSocket provider URLs
+      - BASE_NETWORK_WS_URL="wss://eth-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}"
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/postgres?schema=public # Postgres and Redis connection URLs
       - REDIS_URL=redis://redis:password@redis:6379
       - CATCHUP=1 # If enabled, the indexer will try to catch-up with the tip of the blockchain
@@ -67,6 +67,7 @@ services:
       - DISABLE_ORDERS=0 # When in the process of backfilling, order handling should be disabled
       - CIPHER_SECRET=fb1f4b0a7daaada6cae678df32fad0f0
       - OPENSEA_INDEXER_API_BASE_URL=http://relayer:3003
+      - WHITELISTED_CURRENCIES="${WHITELISTED_TOKENS}"
       # Optional
       - METADATA_API_BASE_URL=http://metadata:3002/api
     networks:
@@ -91,10 +92,11 @@ services:
       context: './marketplace'
       dockerfile: 'Dockerfile'
       args:
-        NEXT_PUBLIC_CHAIN_ID: 5
+        PORT: "${FRONTEND_PORT}"
+        NEXT_PUBLIC_CHAIN_ID: "${CHAIN_ID}"
         NEXT_PUBLIC_RESERVOIR_API_BASE: http://indexer:3001
         NEXT_PUBLIC_RESERVOIR_API_BASE_EXTERNAL: http://localhost:3001
-        NEXT_PUBLIC_ALCHEMY_ID: 'TYXOxQE-qhhwe3Sn2ToFhqRl428qXyUI'
+        NEXT_PUBLIC_ALCHEMY_ID: "${ALCHEMY_KEY}"
     networks:
       - local
     ports:
@@ -109,7 +111,7 @@ services:
       dockerfile: 'Dockerfile'
     environment:
       - PORT=3003
-      - CHAIN_ID=5
+      - CHAIN_ID="${CHAIN_ID}"
       - DO_BACKFILL_WORK=1
       - DO_REALTIME_WORK=1
       - DO_LIVE_WORK=1
