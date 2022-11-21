@@ -94,7 +94,7 @@ services:
         NEXT_PUBLIC_CHAIN_ID: 5
         NEXT_PUBLIC_RESERVOIR_API_BASE: http://indexer:3001
         NEXT_PUBLIC_RESERVOIR_API_BASE_EXTERNAL: http://localhost:3001
-        NEXT_PUBLIC_ALCHEMY_ID: "TYXOxQE-qhhwe3Sn2ToFhqRl428qXyUI"
+        NEXT_PUBLIC_ALCHEMY_ID: 'TYXOxQE-qhhwe3Sn2ToFhqRl428qXyUI'
     networks:
       - local
     ports:

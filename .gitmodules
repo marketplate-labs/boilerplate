@@ -1,12 +1,12 @@
-[submodule "indexer"]
-	path = indexer
-	url = ./indexer
 [submodule "marketplace"]
 	path = marketplace
-	url = ./marketplace
-[submodule "metadata"]
-	path = metadata
-	url = ./metadata
+	url = git@github.com:marketplate-labs/marketplace.git
 [submodule "relayer"]
 	path = relayer
-	url = ./relayer
+	url = git@github.com:marketplate-labs/relayer.git
+[submodule "metadata"]
+	path = metadata
+	url = git@github.com:marketplate-labs/metadata.git
+[submodule "indexer"]
+	path = indexer
+	url = git@github.com:marketplate-labs/indexer.git
