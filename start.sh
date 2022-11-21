@@ -27,14 +27,14 @@ _show_message_() {
 }
 
 _launch_docker_compose_() {
-  docker-compose --env-file $FILE up
+  docker-compose --env-file $FILE up --build
 }
 
 mainmenu() {
   _show_welcome_
 
   if test -f "$FILE"; then
-    _show_message_ "Configuration $FILE already exists, skipping configuration..."
+    _show_message_ "Configuration file $FILE already exists, skipping configuration..."
   else
     echo -n "Marketplace name (default Marketplate): "
     read -r MARKETPLACE_NAME
@@ -63,6 +63,7 @@ FRONTEND_PORT=${FRONTEND_PORT}
 WHITELISTED_TOKENS=${WHITELISTED_TOKENS}
 " >> $FILE
 
+    _show_message_ "Configuration file was saved at $FILE. You can change it anytime and restart the marketplace"
   fi
 
   _launch_docker_compose_
