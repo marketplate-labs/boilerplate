@@ -1,0 +1,12 @@
+[submodule "indexer"]
+	path = indexer
+	url = ./indexer
+[submodule "marketplace"]
+	path = marketplace
+	url = ./marketplace
+[submodule "metadata"]
+	path = metadata
+	url = ./metadata
+[submodule "relayer"]
+	path = relayer
+	url = ./relayer
